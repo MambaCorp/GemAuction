@@ -9,8 +9,6 @@
     "express": "3.4.8",
     "jade": "*",
     "redis": "~0.10.0",
-    "connect": "~2.13.0",
-    "mocha": "~1.17.1",
-    "sequelize": "~1.7.0-rc6"
+    "mocha": "~1.17.1"
   }
 }
