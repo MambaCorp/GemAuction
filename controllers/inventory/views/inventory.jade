@@ -1,0 +1,25 @@
+extends ../../../views/layout
+
+block stylesheets
+	link(rel='stylesheet', href='/css/inventory.css')
+
+block content
+	.row
+		.col-md-12
+			h1 Inventory
+	.row
+		.col-md-3
+			.list-group
+				a(href='#', class='list-group-item active') Lorem Ipsum
+				a(href='#', class='list-group-item') Sit Dolor Amet
+				a(href='#', class='list-group-item') Gem
+				a(href='#', class='list-group-item') Gem
+				a(href='#', class='list-group-item') Sit Dolor Amet
+		.col-md-9
+			form(action='/inventory/add', method='post')
+				div
+					input(type='text', name='name')
+				div
+					input(type='submit', value='Submit')
+
+block scripts

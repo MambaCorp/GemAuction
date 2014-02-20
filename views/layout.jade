@@ -7,8 +7,7 @@ html
 		link(rel='stylesheet', href='/bootstrap/css/bootstrap-responsive.min.css')
 		link(rel='stylesheet', href='/bootstrap/css/bootstrap-theme.min.css')
 		link(rel='stylesheet', href='/bootstrap/css/theme.css')
-		script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
-		script(src='/bootstrap/js/bootstrap.min.js')
+		block stylesheets
 	body
 		.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
 			.container
@@ -29,3 +28,6 @@ html
 							a(href='#') Contact
 		.container
 			block content
+		block scripts
+		script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+		script(src='/bootstrap/js/bootstrap.min.js')
