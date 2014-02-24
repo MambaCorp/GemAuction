@@ -1,0 +1,8 @@
+extends ../../../views/layout
+
+block content
+	form(action='/user/add', method='post')
+		input(type='text', name='email', placeholder='email')
+		input(type='text', name='firstName', placeholder='first name')
+		input(type='text', name='lastName', placeholder='lastName')
+		input(type='submit', value='Submit')

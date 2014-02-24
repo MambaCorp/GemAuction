@@ -7,4 +7,6 @@ var User = new Schema({
 	lastName: String
 });
 
-module.exports = User;
+var UserModel = mongoose.model('User', User);
+
+module.exports = UserModel;

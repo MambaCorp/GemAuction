@@ -6,8 +6,19 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var mongoose = require('mongoose');
 
 var app = express();
+
+// Database 
+
+mongoose.connect('mongodb://localhost/gem');
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback(){
+	console.log("Connected Successfully to Database!")
+});
 
 // all environments
 app.set('port', process.env.PORT || 3000);
