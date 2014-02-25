@@ -8,6 +8,7 @@ var http 			= require('http');
 var path 			= require('path');
 var mongoose 		= require('mongoose');
 var passport 		= require('passport');
+var RedisStore			= require('connect-redis')(express);
 var LocalStrategy	= require('passport-local').Strategy;
 
 var User = require(path.join(__dirname, '/models/user.js'));
@@ -38,7 +39,14 @@ app.configure(function() {
 		layout: false
 	});
 
-	app.use(express.session({ secret: 'herpderp' }));
+	app.use(express.session({ 
+		store: new RedisStore({
+			host: 'localhost',
+			port: 6379
+		}),
+		cookie: { maxAge: 3600000, httpOnly: true },
+		secret: 'herpderp'
+	}));
 	app.use(passport.initialize());
 	app.use(passport.session());
 
@@ -60,12 +68,10 @@ if ('development' == app.get('env')) {
 }
 
 //route definitions
-require(__dirname + '/controllers/index')(app, passport);
-//require(__dirname + '/controllers/session/routes')(app)
-require(__dirname + '/controllers/user/login')(app, passport);
-require(path.join(__dirname) + '/controllers/user/routes')(app, passport);
-require(path.join(__dirname) + '/controllers/user/login')(app, passport);
-require(path.join(__dirname) + '/controllers/user/register')(app, passport);
+require(path.join(__dirname, '/controllers/index'))(app, passport);
+require(path.join(__dirname, '/controllers/user/login'))(app, passport);
+require(path.join(__dirname, '/controllers/user/routes'))(app, passport);
+require(path.join(__dirname, '/controllers/user/register'))(app, passport);
 
 
 http.createServer(app).listen(app.get('port'), function(){
