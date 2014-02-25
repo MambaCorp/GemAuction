@@ -1,9 +1,10 @@
+var authenticateHelper = require('../libs/authenticateHelper.js')
 
 /*
  * GET home page.
  */
-routes = function(app){
-	app.get('/', function(req,res){
+routes = function(app, passport){
+	app.get('/', authenticateHelper.isLoggedIn, function(req,res){
 		res.render('index', { title: 'Express' });
 	});
 };
