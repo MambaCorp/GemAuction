@@ -19,9 +19,8 @@ routes = function(app){
 		var user = new User(req.body.user);
 
 
-		function userSaveFailed(){
-			req.flash('error', 'Account create failed!');
-			res.render('/register', { user: new User() });
+		function userSaveFailed(){			
+			return res.redirect('/');
 		}
 
 		user.save(function(err){
@@ -29,7 +28,7 @@ routes = function(app){
 			return console.log('user create: ' + user.email);
 		});
 
-		return res.redirect("/register");
+		return res.redirect('/register');
 
 	});
 

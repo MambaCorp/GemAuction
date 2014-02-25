@@ -10,7 +10,7 @@ var UserModel = new Schema({
 	email: { type: String, validate: [ validatePresenceOf, 'an email is required' ], index: { unique: true } },
 	firstName: String,
 	lastName: String,
-	hash_password: String,
+	hashed_password: String,
 	salt: String
 });
 

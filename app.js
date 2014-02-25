@@ -46,7 +46,7 @@ if ('development' == app.get('env')) {
 
 //route definitions
 require(__dirname + '/controllers/index')(app)
-require(__dirname + '/controllers/authentication/routes')(app)
+require(__dirname + '/controllers/session/routes')(app)
 require(__dirname + '/controllers/inventory/routes')(app)
 require(__dirname + '/controllers/user/routes')(app)
 

@@ -3,4 +3,4 @@ extends ../../../views/layout
 block content
 	each user in users
 		div
-			| #{user.email}
+			| #{user.email} #{user.hashed_password}
