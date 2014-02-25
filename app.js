@@ -65,7 +65,7 @@ require(__dirname + '/controllers/index')(app, passport);
 require(__dirname + '/controllers/user/login')(app, passport);
 require(path.join(__dirname) + '/controllers/user/routes')(app, passport);
 require(path.join(__dirname) + '/controllers/user/login')(app, passport);
-require(path.join(__dirname) + '/controllers/register/register')(app, passport);
+require(path.join(__dirname) + '/controllers/user/register')(app, passport);
 
 
 http.createServer(app).listen(app.get('port'), function(){

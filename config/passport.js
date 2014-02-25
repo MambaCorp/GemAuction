@@ -55,7 +55,7 @@ module.exports = function(passport){
 					return done(null, false, { message: 'that email already exists' });
 				}else{
 					var newUser = new User();
-					newUser.email = email;
+					newUser.email = username;
 					newUser.password = newUser.generateHash(password);
 					newUser.firstName = req.body.user.firstName;
 					newUser.lastName = req.body.user.lastName;
