@@ -19,20 +19,16 @@ module.exports = function(passport){
 		passReqToCallback: true	
 	},
 	function(req, username, password, done){
-		User.findOne({ email: username }, function(err, user){
-			console.log("testing12345");
-			if(err) {
-				console.log("error");
+		User.findOne({ email: username }, function(err, user){			
+			if(err) {				
 				return done(err);
 			}
 				
-			if(!user){
-				console.log('invalid user');
+			if(!user){				
 				return done(null, false, { message: 'that user does not exist' });
 			}
 				
-			if(!user.validPassword(password)) {
-				console.log('invalid password');
+			if(!user.validPassword(password)) {				
 				return done(null, false, { message: 'password was incorrect' });
 			}
 
