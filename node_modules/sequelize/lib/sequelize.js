@@ -2,6 +2,7 @@ var url                = require("url")
   , Path               = require("path")
   , Utils              = require("./utils")
   , DAOFactory         = require("./dao-factory")
+  , DAOValidator       = require("./dao-validator")
   , DataTypes          = require('./data-types')
   , DAOFactoryManager  = require("./dao-factory-manager")
   , QueryInterface     = require("./query-interface")
@@ -58,8 +59,8 @@ module.exports = (function() {
       urlParts = url.parse(arguments[0])
 
       // SQLite don't have DB in connection url
-      if (urlParts.path) {
-        database = urlParts.path.replace(/^\//,  '')
+      if (urlParts.pathname) {
+        database = urlParts.pathname.replace(/^\//,  '')
       }
 
       dialect = urlParts.protocol
@@ -135,6 +136,10 @@ module.exports = (function() {
   Sequelize.Utils = Utils
 
   Sequelize.QueryTypes = QueryTypes
+
+  Sequelize.DAOValidator = DAOValidator
+
+  Sequelize.DAOFactory = Sequelize.Model = DAOFactory
 
   for (var dataType in DataTypes) {
     Sequelize[dataType] = DataTypes[dataType]
@@ -364,7 +369,7 @@ module.exports = (function() {
       options = Utils._.extend({}, this.options.sync, options)
     }
 
-    options.logging = options.logging === undefined ? false : Boolean(options.logging)
+    options.logging = options.logging === undefined ? false : options.logging
 
     var chainer = new Utils.QueryChainer()
 

@@ -1,0 +1,23 @@
+extends ../../../views/layout
+
+block content
+	h1
+		| Register
+	form(action='/register/new', method='post', role="form")
+		.form-group
+			label(for='email')
+				| Email: 
+			input(id='email', type='text', class='form-control', name='user[email]', placeholder='email')
+		.form-group
+			label(for='firstName')
+				| First Name: 
+			input(id='firstName', type='text', class='form-control', name='user[firstName]', placeholder='first name')
+		.form-group
+			label(for='lastName')
+				| Last Name: 
+			input(id='lastName', type='text', class='form-control', name='user[lastName]', placeholder='last name')
+		.form-group
+			label(for='password')
+				| Password: 
+			input(id='password', type='password', class='form-control', name='user[password]', placeholder='password')		
+		input(type='submit', class='btn btn-default')

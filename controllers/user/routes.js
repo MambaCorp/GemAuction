@@ -1,4 +1,4 @@
-var UserModel = require('../../models/user/userModel.js')
+var User = require('../../models/user/user.js')
 var path = require('path');
 
 /*
@@ -6,7 +6,7 @@ var path = require('path');
  */
 routes = function(app){
 	app.get('/user/list', function(req, res){
-		UserModel.find(function(err, users){
+		User.find(function(err, users){
 			if(!err){
 				res.render(path.join(__dirname, '/views/userList.jade'), { users: users });				
 			}else{
@@ -15,8 +15,26 @@ routes = function(app){
 		});
 	});
 
-	app.get('/user', function(req, res){
-		res.render(path.join(__dirname, '/views/addUser.jade'), { title: "Add User" });
+	app.post('/register/new', function(req, res){
+		var user = new User(req.body.user);
+
+
+		function userSaveFailed(){
+			req.flash('error', 'Account create failed!');
+			res.render('/register', { user: new User() });
+		}
+
+		user.save(function(err){
+			if(err) userSaveFailed();
+			return console.log('user create: ' + user.email);
+		});
+
+		return res.redirect("/register");
+
+	});
+
+	app.get('/register', function(req, res){
+		res.render(path.join(__dirname, '/views/register.jade'), { user: new User() });
 	});
 
 	app.post('/user/add', function(req, res){

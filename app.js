@@ -20,6 +20,10 @@ db.once('open', function callback(){
 	console.log("Connected Successfully to Database!")
 });
 
+// Sessions
+app.use(express.cookieParser());
+app.use(express.session({ secret: 'herpderp' }))
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
