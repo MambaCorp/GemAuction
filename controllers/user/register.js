@@ -3,11 +3,11 @@ var passport = require('passport');
 var path = require('path');
 
 routes = function(app, passport){
-	app.get('/signup', function(req, res){
-		res.render(path.join(__dirname, '/views/signup.jade'));
+	app.get('/register', function(req, res){
+		res.render(path.join(__dirname, '/views/register.jade'));
 	});
 
-	app.post('/signup', 
+	app.post('/register', 
 		passport.authenticate('local-signup', {
 			successRedirect: '/',
 			failureRedirect: '/signup'

@@ -47,6 +47,7 @@ app.configure(function() {
 		cookie: { maxAge: 3600000, httpOnly: true },
 		secret: 'herpderp'
 	}));
+	
 	app.use(passport.initialize());
 	app.use(passport.session());
 
