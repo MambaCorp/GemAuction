@@ -1,4 +1,3 @@
-var User = require('../../models/user.js');
 var passport = require('passport');
 var path = require('path');
 

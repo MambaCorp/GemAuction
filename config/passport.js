@@ -1,4 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
+var Account = require('../models/account');
 var User = require('../models/user');
 
 module.exports = function(passport){
@@ -19,16 +20,16 @@ module.exports = function(passport){
 		passReqToCallback: true	
 	},
 	function(req, username, password, done){
-		User.findOne({ email: username }, function(err, user){
+		Account.findOne({ email: username }, function(err, account){
 			if(err) {				
 				return done(err);
 			}
 				
-			if(!user){				
+			if(!account){				
 				return done(null, false, { message: 'that user does not exist' });
 			}
 				
-			if(!user.validPassword(password)) {				
+			if(!account.validPassword(password)) {				
 				return done(null, false, { message: 'password was incorrect' });
 			}
 
@@ -44,22 +45,33 @@ module.exports = function(passport){
 	},
 	function(req, username, password, done){
 		process.nextTick(function() {
-			User.findOne({ email: username }, function(err, user){
+			Account.findOne({ email: username }, function(err, account){
 				if(err) return done(err);
 
-				if(user) {
+				if(account) {
 					return done(null, false, { message: 'that email already exists' });
 				}else{
-					var newUser = new User();
-					newUser.email = username;
-					newUser.password = newUser.generateHash(password);
-					newUser.firstName = req.body.user.firstName;
-					newUser.lastName = req.body.user.lastName;
+					var newAccount = new Account();
+					newAccount.email = username;
+					newAccount.password = newAccount.generateHash(password);
 
-					newUser.save(function(err){
+					newAccount.save(function(err, createdAccount){
 						if(err) throw err;
-						return done(null, newUser);
-					});
+
+						if(createdAccount) {
+							var newUser = new User();
+							newUser.firstName = req.body.user.firstName;
+							newUser.lastName = req.body.user.lastName;
+							newUser.email = username;
+							newUser.account = createdAccount.id;
+							
+							newUser.save(function(err){
+								if(err) throw err;
+
+								return done(null, newUser);
+							});
+						}
+					});				
 				}
 			});
 		});
