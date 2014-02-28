@@ -13,23 +13,23 @@ module.exports = function(passport){
 		});
 	});
 
-	passport.use('local-login', 
+	passport.use('local-login',
 	new LocalStrategy({
 		usernameField: 'user[email]',
 		passwordField: 'user[password]',
-		passReqToCallback: true	
+		passReqToCallback: true
 	},
 	function(req, username, password, done){
 		Account.findOne({ email: username }, function(err, account){
-			if(err) {				
+			if(err) {
 				return done(err);
 			}
-				
-			if(!account){				
+
+			if(!account){
 				return done(null, false, { message: 'that user does not exist' });
 			}
-				
-			if(!account.validPassword(password)) {				
+
+			if(!account.validPassword(password)) {
 				return done(null, false, { message: 'password was incorrect' });
 			}
 
@@ -64,17 +64,16 @@ module.exports = function(passport){
 							newUser.lastName = req.body.user.lastName;
 							newUser.email = username;
 							newUser.account = createdAccount.id;
-							
+
 							newUser.save(function(err){
 								if(err) throw err;
 
 								return done(null, newUser);
 							});
 						}
-					});				
+					});
 				}
 			});
 		});
 	}));
 };
-

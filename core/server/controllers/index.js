@@ -1,5 +1,5 @@
-var authenticateHelper = require('../helpers/authenticateHelper.js')
-
+var authenticateHelper = require('../helpers/authenticateHelper.js');
+var path = require('path');
 /*
  * GET home page.
  */
