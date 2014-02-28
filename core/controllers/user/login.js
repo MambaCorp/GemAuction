@@ -7,7 +7,7 @@ routes = function(app, passport){
 	});
 
 	app.post('/login', passport.authenticate('local-login',
-		{ 
+		{
 			successRedirect: '/',
 		  	failureRedirect: '/user/list'
 		}));
@@ -16,13 +16,7 @@ routes = function(app, passport){
 	app.get('/logout', function(req, res){
 		req.logout();
 		res.redirect('/login');
-	});	
+	});
 }
-
-function isLoggedIn(req, res, next){
-	if(req.isAuthenticated()) return next();
-
-	res.redirect('/login');
-};
 
 module.exports = routes;

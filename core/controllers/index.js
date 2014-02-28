@@ -1,4 +1,4 @@
-var authenticateHelper = require('../libs/authenticateHelper.js')
+var authenticateHelper = require('../helpers/authenticateHelper.js')
 
 /*
  * GET home page.

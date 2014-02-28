@@ -1,0 +1,7 @@
+extends ../../../views/layout
+
+block content
+	form(action='/gem/add', method='post', role='form')
+		.form-group
+			label(for='gemName') Gem Name:
+			input(type='text', id='gemName', name='gem[name]', class='form-control')
