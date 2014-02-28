@@ -8,7 +8,7 @@ module.exports = function(passport){
 	});
 
 	passport.deserializeUser(function(id, done){
-		User.findById(id, function(err, user){
+		Account.findById(id, function(err, user){
 			done(err, user);
 		});
 	});
@@ -33,7 +33,9 @@ module.exports = function(passport){
 				return done(null, false, { message: 'password was incorrect' });
 			}
 
-			return done(null, user);
+			console.log("username: " + account.email + " Password: " + account.password);
+
+			return done(null, account);
 		});
 	}));
 
