@@ -8,7 +8,7 @@ routes = function(app, passport){
 
 	app.post('/login', passport.authenticate('local-login',
 		{
-			successRedirect: '/',
+				successRedirect: '/',
 		  	failureRedirect: '/user/list'
 		}));
 
